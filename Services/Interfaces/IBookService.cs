@@ -3,13 +3,12 @@
 namespace TestTask.Services.Interfaces
 {
     /// <summary>
-    /// IOrderService.
+    /// Books service defenition.
     /// DO NOT change anything here. Use created contract and provide only needed implementation.
     /// </summary>
-    public interface IOrderService
+    public interface IBookService
     {
-        public Task<Order> GetOrder();
-
-        public Task<List<Order>> GetOrders();
+        public Task<Book> GetBook();
+        public Task<List<Book>> GetBooks();
     }
 }

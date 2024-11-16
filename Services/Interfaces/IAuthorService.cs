@@ -3,13 +3,12 @@
 namespace TestTask.Services.Interfaces
 {
     /// <summary>
-    /// IUserService.
+    /// Authors service defenition.
     /// DO NOT change anything here. Use created contract and provide only needed implementation.
     /// </summary>
-    public interface IUserService
+    public interface IAuthorService
     {
-        public Task<User> GetUser();
-
-        public Task<List<User>> GetUsers();
+        public Task<Author> GetAuthor();
+        public Task<List<Author>> GetAuthors();
     }
 }

@@ -4,42 +4,42 @@ using TestTask.Services.Interfaces;
 namespace TestTask.Controllers
 {
     /// <summary>
-    /// Users controller.
+    /// Authors controller.
     /// DO NOT change anything here. Use created contract and provide only needed implementation.
     /// </summary>
-    [Route("api/v1/users")]
+    [Route("api/v1/authors")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class AuthorsController : ControllerBase
     {
-        private readonly IUserService userService;
+        private readonly IAuthorService _authorService;
 
-        public UsersController(IUserService userService)
+        public AuthorsController(IAuthorService authorService)
         {
-            this.userService = userService;
+            _authorService = authorService;
         }
 
         /// <summary>
-        /// Returns selected user. 
+        /// Returns selected author. 
         /// Selection rules are specified in Task description provided by recruiter
         /// </summary>
         [HttpGet]
-        [Route("selected-user")]
+        [Route("selected-author")]
         public async Task<IActionResult> Get()
         {
-            var result = await this.userService.GetUser();
-            return this.Ok(result);
+            var result = await _authorService.GetAuthor();
+            return Ok(result);
         }
 
         /// <summary>
-        /// Returns list of selected users. 
+        /// Returns list of selected authors. 
         /// Selection rules are specified in Task description provided by recruiter
         /// </summary>
         [HttpGet]
-        [Route("selected-users")]
-        public async Task<IActionResult> GetUsers()
+        [Route("selected-authors")]
+        public async Task<IActionResult> GetAuthors()
         {
-            var result = await this.userService.GetUsers();
-            return this.Ok(result);
+            var result = await _authorService.GetAuthors();
+            return Ok(result);
         }
     }
 }
