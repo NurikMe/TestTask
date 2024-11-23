@@ -5,6 +5,8 @@ using TestTask.Data;
 
 namespace TestTask.Services.Implementations;
 
+public class AuthorView{}
+
 public class AuthorService : IAuthorService
 {
     private readonly ApplicationDbContext _dbContext;
@@ -15,10 +17,12 @@ public class AuthorService : IAuthorService
 
     public async Task<Author> GetAuthor()
     {
-        Book longestTitleBook = _dbContext.Books.OrderByDescending(book => book.Title.Length).First();
+        int AuthorOfLongestTitle = await _dbContext.Books.OrderByDescending(book => book.Title.Length)
+                                                   .Select(book => book.AuthorId)
+                                                   .FirstAsync();
         return await _dbContext.Authors
             .OrderBy(author => author.Id)
-            .Where(author => author.Books.Contains(longestTitleBook, new BookComparer()))
+            .Where(author => author.Id.Equals(AuthorOfLongestTitle))
             .FirstAsync();
     }
 
@@ -26,6 +30,7 @@ public class AuthorService : IAuthorService
     {
         return await _dbContext.Authors
             .Where(author => author.Books.Count(book => book.PublishDate.Year > 2015) % 2 == 0)
+            .Where(author => author.Books.Count(book => book.PublishDate.Year > 2015) > 0)
             .ToListAsync();
     }
 }
